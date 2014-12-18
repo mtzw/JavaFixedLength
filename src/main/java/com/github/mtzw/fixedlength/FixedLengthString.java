@@ -44,16 +44,16 @@ public class FixedLengthString implements Serializable {
 		this.parts = builder.build();
 	}
 
-	public String getText() {
-		return getTextsAsList().stream().collect(Collectors.joining());
-	}
-
 	public String getTextPartOf(int numOfPart) {
 		return this.parts.get(numOfPart).getText();
 	}
 
 	public List<String> getTextsAsList() {
 		return this.parts.values().stream().map(p -> p.text).collect(Collectors.toList());
+	}
+
+	public String getTextsAsString() {
+		return getTextsAsList().stream().collect(Collectors.joining());
 	}
 
 	/*internal*/ static class FixedLengthStringPart implements Serializable,
