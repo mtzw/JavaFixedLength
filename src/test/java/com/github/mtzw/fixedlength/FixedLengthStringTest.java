@@ -93,4 +93,16 @@ public class FixedLengthStringTest {
 		}
 	}
 
+	@Test
+	public void testGetText() {
+		String source = "あめんぼあかいなあいうえお";
+		Integer[] partLengths = new Integer[] { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+				1, 1, 1 };
+		FixedLengthString actual = new FixedLengthString(source, partLengths);
+
+		assertThat(actual.getTextsAsList().size(), is(13));
+		assertThat(actual.getTextPartOf(5) + actual.getTextPartOf(6) + actual.getTextPartOf(7), is("あかい"));
+		assertThat(actual.getText(), is("あめんぼあかいなあいうえお"));
+	}
+
 }
