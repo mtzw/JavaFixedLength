@@ -3,7 +3,6 @@ package com.github.mtzw.fixedlength;
 import java.io.Serializable;
 import java.util.Arrays;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import com.google.common.base.Strings;
 import com.google.common.collect.ImmutableMap;
@@ -25,11 +24,9 @@ public class FixedLengthString implements Serializable {
 		} else if (Strings.isNullOrEmpty(source)) {
 			throw new IllegalArgumentException("source");
 		}
-		Stream<Integer> pLengthStream = Arrays.asList(partLengths).stream();
-		if (source.length() != pLengthStream.collect(
-				Collectors.summingInt(i -> i)).intValue()) {
-			throw new IllegalArgumentException(
-					"UnMatch. (source and sum of splitPositions)");
+		if (source.length() != Arrays.asList(partLengths).stream()
+				.collect(Collectors.summingInt(i -> i)).intValue()) {
+			throw new IllegalArgumentException("UnMatch. (source and sum of partLengths)");
 		}
 	}
 
@@ -50,7 +47,7 @@ public class FixedLengthString implements Serializable {
 		return this.parts.get(numOfPart).getText();
 	}
 
-	public static class FixedLengthStringPart implements Serializable,
+	/*internal*/ static class FixedLengthStringPart implements Serializable,
 			Comparable<FixedLengthStringPart> {
 		private static final long serialVersionUID = -1679511988027799766L;
 

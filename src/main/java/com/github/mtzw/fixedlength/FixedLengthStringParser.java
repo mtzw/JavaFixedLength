@@ -1,6 +1,6 @@
 package com.github.mtzw.fixedlength;
 
-public class FixedLengthStringParser {
+/*internal*/ class FixedLengthStringParser {
 
 	private final String source;
 	private int position = 0;

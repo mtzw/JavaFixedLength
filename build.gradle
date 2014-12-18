@@ -2,7 +2,7 @@ apply plugin: 'java'
 apply plugin: 'maven'
 
 version = '1.0-SNAPSHOT'
-group = 'JavaFixedLength'
+group = 'com.github'
 
 sourceCompatibility = '1.8'
 
@@ -46,7 +46,6 @@ repositories {
 
 dependencies {
   compile 'com.google.guava:guava:18.0'
-  testCompile 'org.mockito:mockito-core:1.9.5'
   testCompile 'junit:junit:4.11'
 }
 
