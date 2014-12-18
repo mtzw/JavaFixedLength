@@ -1,4 +1,14 @@
 *.class
+.gradle
+.settings
+gradle
+.classpath
+.project
+gradle-app.setting
+gradle.properties
+bin
+logs
+build
 
 # Mobile Tools for Java (J2ME)
 .mtj.tmp/
