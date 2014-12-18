@@ -3,6 +3,8 @@ package com.github.mtzw.fixedlength;
 import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.*;
 
+import java.util.List;
+
 import org.junit.Test;
 
 import com.github.mtzw.fixedlength.FixedLengthString.FixedLengthStringPart;
@@ -61,6 +63,34 @@ public class FixedLengthStringTest {
 		assertThat(actual.getTextPartOf(11), is("1"));
 		assertThat(actual.getTextPartOf(12), is("1234567"));
 		assertThat(actual.getTextPartOf(13), is("                 "));
+	}
+
+	@Test
+	public void testGetTextsAsList() {
+		String source = "AAAAABBCCCCDDDDD  DDDDD";
+		Integer[] partLengths = new Integer[] { 5, 2, 4, 12 };
+		FixedLengthString actual = new FixedLengthString(source, partLengths);
+
+		List<String> texts = actual.getTextsAsList();
+		for (int i = 0; i < texts.size(); i++) {
+			String text = texts.get(i);
+			switch (i) {
+			case 0:
+				assertThat(text, is("AAAAA"));
+				break;
+			case 1:
+				assertThat(text, is("BB"));
+				break;
+			case 2:
+				assertThat(text, is("CCCC"));
+				break;
+			case 3:
+				assertThat(text, is("DDDDD  DDDDD"));
+				break;
+			default:
+				break;
+			}
+		}
 	}
 
 }

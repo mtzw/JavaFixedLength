@@ -2,11 +2,13 @@ package com.github.mtzw.fixedlength;
 
 import java.io.Serializable;
 import java.util.Arrays;
+import java.util.List;
 import java.util.stream.Collectors;
 
 import com.google.common.base.Strings;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableMap.Builder;
+import com.google.common.collect.ImmutableSortedMap;
 
 public class FixedLengthString implements Serializable {
 	private static final long serialVersionUID = 5777134278442089041L;
@@ -32,8 +34,7 @@ public class FixedLengthString implements Serializable {
 
 	void splitParts(String source, Integer... partLengths) {
 		FixedLengthStringParser parser = new FixedLengthStringParser(source);
-		Builder<Integer, FixedLengthStringPart> builder = ImmutableMap
-				.<Integer, FixedLengthStringPart> builder();
+		Builder<Integer, FixedLengthStringPart> builder = ImmutableSortedMap.<Integer, FixedLengthStringPart> naturalOrder();
 		Integer seq = 1;
 		for (Integer partLength : partLengths) {
 			FixedLengthStringPart part = new FixedLengthStringPart(seq++,
@@ -45,6 +46,10 @@ public class FixedLengthString implements Serializable {
 
 	public String getTextPartOf(int numOfPart) {
 		return this.parts.get(numOfPart).getText();
+	}
+
+	public List<String> getTextsAsList() {
+		return this.parts.values().stream().map(p -> p.text).collect(Collectors.toList());
 	}
 
 	/*internal*/ static class FixedLengthStringPart implements Serializable,
